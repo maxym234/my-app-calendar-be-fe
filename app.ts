@@ -1,17 +1,29 @@
 //require для підключення пакетів
-import express, { Express } from 'express';
-import { router } from './routest/auth.routs';
+import express, { Express, Router } from 'express';
+import * as TimeController from './controllers/AvalibleTime.controllers';
+import * as UserController from './controllers/User.controllers';
+import { registerValidator } from './utils/validations';
 const config = require('config')
 //MongoDB
 const mongoose = require('mongoose')
 const app: Express = express();
-app.use('/api/auth', router)
+const router: Router = express();
+app.use(express.json())
+
+router.post('/auth/registration', registerValidator, UserController.registration)
+router.post('/auth/login', UserController.login)
+
+router.post('/avalible-time', TimeController.create)
+router.get('/avalible-allTime', TimeController.getAll)
+router.get('/avalible-time/:date', TimeController.getOne)
+app.use('/api', router);
+
 const PORT = config.get('port') || 5000;
 async function start() {
     try {
         await mongoose.connect(config.get('mongoURL'), {
             // useNewUrlParser: true
-        })
+        }).then(() => console.log('Db Ok'))
         app.listen(PORT, () => console.log(`App has been started on port ${PORT}...!`))
     } catch (e) {
         console.log('Server error', e);

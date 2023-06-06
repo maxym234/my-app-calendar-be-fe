@@ -1,5 +1,6 @@
 export interface IUser {
-    password: string;
+    hashedPassword: string;
     email: string;
-    links: any[]
+    fullName: string;
+    _doc: any;
   }

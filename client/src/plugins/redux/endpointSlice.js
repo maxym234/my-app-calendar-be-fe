@@ -6,7 +6,7 @@ const initialState = { users: [], albums: [] }
 export const fetchData = createAsyncThunk(
   'data/fetchData',
   async (params, arg) => {
-    const response = await fetch(`${API_URL}?from=2023-05-17&to=2023-05-17&location=1&category=&provider=4&service=1&count=1&booking_id=`);
+    const response = await fetch(`${API_URL}?from=2023-05-29&to=2023-07-09&provider=4&service=1&location=1&category=&booking_id=`);
     const resultResponse = await response.json();
     return resultResponse;
   }
