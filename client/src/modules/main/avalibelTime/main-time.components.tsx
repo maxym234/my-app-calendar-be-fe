@@ -1,24 +1,27 @@
 import { useEffect } from 'react';
 import Button from 'antd/lib/button';
-import { userList, fetchData } from "@app/plugins/redux/endpointSlice";
-import { useSelector, useDispatch } from 'react-redux';
-import { AppDispatch } from '@app/store';
+import { fetchAvalibleTime } from '@app/slices/avalibleTime.slice';
+import { useAppSelector, useAppDispatch } from '@app/store/hooks';
 
+interface Props {
+  date: string
+}
 
-export const AvalibelTime = () => {  
-  const dispatch = useDispatch<AppDispatch>();
-  const data = useSelector(userList);
+export const AvalibelTime: React.FC<Props> = ({ date }) => {  
+  const dispatch = useAppDispatch();
+  const data = useAppSelector(state => state.avalibleTimeSlice.data);
+  console.log(date, 'date');
   useEffect(() => {
-    dispatch(fetchData());
-  }, [dispatch]);
+    dispatch(fetchAvalibleTime(date));
+  }, [date, dispatch]);
   
     return (
         <div className="mt-[30px] mb-[15px]">
           <h2 className="text-center text-[24px] font-semibold mb-[15px]">Available start times</h2>
           <div className='flex max-w-[1190px] flex-wrap'>
-            {data?.map( (d: any) => 
-            <Button>
-              {d?.time}
+            {data?.time?.map( (time: any) => 
+            <Button >
+              {time}
             </Button>
             )}
           </div>

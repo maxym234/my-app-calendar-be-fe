@@ -3,13 +3,14 @@ import express, { Express, Router } from 'express';
 import * as TimeController from './controllers/AvalibleTime.controllers';
 import * as UserController from './controllers/User.controllers';
 import { registerValidator } from './utils/validations';
+import cors from 'cors';
 const config = require('config')
 //MongoDB
 const mongoose = require('mongoose')
 const app: Express = express();
 const router: Router = express();
 app.use(express.json())
-
+app.use(cors())
 router.post('/auth/registration', registerValidator, UserController.registration)
 router.post('/auth/login', UserController.login)
 

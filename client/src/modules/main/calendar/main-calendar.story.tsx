@@ -5,9 +5,6 @@ export default {
   title: 'Modules/Main/Calendar',
   component: Calendar,
   tags: ['autodocs'],
-  argTypes: {
-    backgroundColor: { control: 'color' },
-  },
 } satisfies Meta<typeof Calendar>;
 type Story = StoryObj<typeof Calendar>;
 

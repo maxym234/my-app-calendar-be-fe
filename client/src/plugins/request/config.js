@@ -1,1 +1,0 @@
-export const API_URL = 'https://minimalthemedemo.simplybook.it/v2/booking/time-slots/';

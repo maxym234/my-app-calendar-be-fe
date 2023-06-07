@@ -5,9 +5,6 @@ export default {
   title: 'Modules/Main/AvalibelTime',
   component: AvalibelTime,
   tags: ['autodocs'],
-  argTypes: {
-    backgroundColor: { control: 'color' },
-  },
 } satisfies Meta<typeof AvalibelTime>;
 type Story = StoryObj<typeof AvalibelTime>;
 

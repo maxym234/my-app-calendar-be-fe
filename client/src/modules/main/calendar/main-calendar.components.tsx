@@ -1,6 +1,14 @@
+import { useState } from 'react'
 import { Calendar as CalendarAntd, Typography, Badge, BadgeProps }  from 'antd/lib';
+import { AvalibelTime } from "@app/modules/main/avalibelTime/main-time.components";
 import type { Dayjs } from 'dayjs';
-export const Calendar = () => {  
+
+interface Props {
+  date: string
+}
+
+export const Calendar: React.FC<Props> = () => {  
+    const [date, setDate] = useState('')
     const dateCurrent = new Date().getDate();    
     const getListData = (value: Dayjs, text: string) => {
         let listData;
@@ -57,7 +65,9 @@ export const Calendar = () => {
                     return false;
                 }}
                 headerRender={({ value }) => {
-                    console.log(value.toDate().toDateString());
+                    console.log(value.toJSON());
+                    
+                    setDate(value.toJSON());
                     
                     return (
                     <div style={{ padding: 8 }}>
@@ -66,6 +76,7 @@ export const Calendar = () => {
                     );
                 }}
             />
+            <AvalibelTime date={date}/>
         </div>
     )
 }
